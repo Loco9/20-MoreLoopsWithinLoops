@@ -11,8 +11,8 @@ def main():
     """ Calls the other functions to test them. """
     # run_test_triangle_right_justified()
     # run_test_triangle_upside_down()
-    run_test_vee()
-    # run_test_numbers_constant_forward()
+    # run_test_vee()
+    run_test_numbers_constant_forward()
     # run_test_numbers_constant_backwards()
     # run_test_numbers_increasing_forward()
 
@@ -74,11 +74,9 @@ def triangle_right_justified(r):
     #   defeat the goal of providing practice at loops within loops.
     # ------------------------------------------------------------------
 
-    k = 0
     for i in range(r):
-        for s in range(1):
-            print((r - k - 1) * ' ', end='')
-            k = k + 1
+        for s in range(r - i - 1):
+            print(' ', end='')
 
         for j in range(i + 1):
             print(j + 1, end='')
@@ -131,9 +129,8 @@ def triangle_upside_down(r):
 
     k = 0
     for i in range(r):
-        for s in range(1):
-            print(k * ' ', end='')
-            k = k + 1
+        for s in range(i):
+            print(' ', end='')
 
         for j in range(r - i):
             print(j + 1, end='')
@@ -181,7 +178,7 @@ def vee(r):
     For purposes of "lining up", assume r is a single digit.
     """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Some tests are already written for you (above).
     #
     # IMPLEMENTATION RESTRICTION:
@@ -190,6 +187,19 @@ def vee(r):
     #   defeat the goal of providing practice at loops within loops.
     # ------------------------------------------------------------------
 
+    for i in range(r):
+        for l in range(i + 1):
+            print(' ', end='')
+
+        for j in range(r - i):
+            print(j + 1, end='')
+        print('-', end='')
+
+        for k in range(r - i):
+            print(j - k + 1, end='')
+
+        print()
+    print()
 
 def run_test_numbers_constant_forward():
     """ Tests the    numbers_constant_forward    function. """

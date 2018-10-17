@@ -9,9 +9,9 @@ Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
 
 def main():
     """ Calls the other functions to test them. """
-    run_test_largest_number()
+    # run_test_largest_number()
     run_test_largest_negative_number()
-    run_test_first_is_elsewhere_too()
+    # run_test_first_is_elsewhere_too()
 
 
 def run_test_largest_number():
@@ -47,7 +47,7 @@ def run_test_largest_number():
 
     # Test 4:
     expected = 6
-    answer = largest_negative_number([(1, 4, 6), (-2, -1, -40)])
+    answer = largest_number([(1, 4, 6), [-2, -1, -40]])
     print('Expected and actual are:', expected, answer)
 
 def largest_number(seq_seq):
@@ -76,29 +76,28 @@ def largest_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
 
-    largest = None
     seq = []
     for i in range(len(seq_seq)):
         a = seq_seq[i]
         for j in range(len(a)):
             seq = seq + [a[j]]
 
-    for k in range(len(seq) - 1):
-        if seq[k + 1] > seq[k]:
-            largest = seq[k + 1]
-        else:
-            largest = seq[k]
-
-    return largest
+    large = 0
+    for k in range(1, len(seq)):
+        if seq[k] > seq[large]:
+            large = k
+    if len(seq) == 0:
+        return None
+    return seq[large]
 
 def run_test_largest_negative_number():
     """ Tests the    largest_negative_number    function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  largest_negative_number  function defined below.
     #
     #   Include enough tests to give you confidence that your solution
@@ -109,6 +108,25 @@ def run_test_largest_negative_number():
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
 
+    # Test 1
+    expected = -1
+    answer = largest_negative_number([[-2, 500, -1], [-3, 2, -1]])
+    print('Expected and actual are:', expected, answer)
+
+    # Test 2
+    expected = None
+    answer = largest_negative_number(([1, 2], [3, 4, 5, 100], [0, 1, 2]))
+    print('Expected and actual are:', expected, answer)
+
+    # Test 3
+    expected = -15
+    answer = largest_negative_number(((-50, 2, 0), (-15, 2, -16)))
+    print('Expected and actual are:', expected, answer)
+
+    # Test 4
+    expected = -4
+    answer = largest_negative_number([[1], [-4]])
+    print('Expected and actual are:', expected, answer)
 
 def largest_negative_number(seq_seq):
     """
@@ -141,6 +159,24 @@ def largest_negative_number(seq_seq):
     #   give sequence of sequences plus any non-list variables you want).
     # ------------------------------------------------------------------
 
+    seq = []
+    for i in range(len(seq_seq)):
+        a = seq_seq[i]
+        for j in range(len(a)):
+            seq = seq + [a[j]]
+
+    negs = []
+    for k in range(len(seq)):
+        if abs(seq[k]) != seq[k]:
+            negs = negs + [abs(seq[k])]
+
+    small = 0
+    for g in range(1, len(negs)):
+        if negs[g] < negs[small]:
+            small = g
+
+    ans = negs[small] * -1
+    return ans
 
 def run_test_first_is_elsewhere_too():
     """ Tests the    first_is_elsewhere_too    function. """

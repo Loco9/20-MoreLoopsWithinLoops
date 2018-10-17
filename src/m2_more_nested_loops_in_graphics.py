@@ -17,7 +17,7 @@ def main():
 def run_test_draw_upside_down_wall():
     """ Tests the    draw_upside_down_wall    function. """
     # Tests 1 and 2 are ALREADY DONE (here).
-    window = rg.RoseWindow(550, 300, 'Upside-down wall, Tests 1 and 2')
+    window = rg.RoseWindow(600, 500, 'Upside-down wall, Tests 1 and 2')
 
     rectangle = rg.Rectangle(rg.Point(125, 230), rg.Point(155, 250))
     draw_upside_down_wall(rectangle, 8, window)
@@ -49,10 +49,29 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
 
+    w = rectangle.get_width()
+    h = rectangle.get_height()
+
+    for i in range(n):
+        y1 = rectangle.corner_1.y + (i * h)
+        y2 = rectangle.corner_2.y + (i * h)
+        for k in range(1):
+            x_new1 = rectangle.corner_1.x + (i * (w / 2))
+            x_new2 = rectangle.corner_2.x + (i * (w / 2))
+            rectangle_new = rg.Rectangle(rg.Point(x_new1, y1), rg.Point(x_new2, y2))
+            rectangle_new.attach_to(window)
+
+        for j in range(n - i):
+            x1 = rectangle_new.corner_1.x + (j * w)
+            x2 = rectangle_new.corner_2.x + (j * w)
+            rectangle1 = rg.Rectangle(rg.Point(x1, y1), rg.Point(x2, y2))
+            rectangle1.attach_to(window)
+
+    window.render()
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

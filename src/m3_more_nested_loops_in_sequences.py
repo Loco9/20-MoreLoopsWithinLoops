@@ -10,8 +10,8 @@ Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
 def main():
     """ Calls the other functions to test them. """
     # run_test_largest_number()
-    run_test_largest_negative_number()
-    # run_test_first_is_elsewhere_too()
+    # run_test_largest_negative_number()
+    run_test_first_is_elsewhere_too()
 
 
 def run_test_largest_number():
@@ -151,7 +151,7 @@ def largest_negative_number(seq_seq):
     where each subsequence contains only numbers.
     """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # CHALLENGE: Try to solve this problem with no additional sequences
@@ -174,6 +174,9 @@ def largest_negative_number(seq_seq):
     for g in range(1, len(negs)):
         if negs[g] < negs[small]:
             small = g
+
+    if len(negs) == 0:
+        return None
 
     ans = negs[small] * -1
     return ans
@@ -425,6 +428,16 @@ def first_is_elsewhere_too(seq_seq):
     #   practice at loops within loops (within loops within ...)
     # ------------------------------------------------------------------
 
+    for i in range(len(seq_seq) - 1):
+        a = seq_seq[i]
+        b = seq_seq[i + 1]
+
+        for j in range(len(a)):
+            for k in range(len(b)):
+                if a[j] == b[k]:
+                    return True
+
+    return False
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
